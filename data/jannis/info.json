@@ -1,0 +1,12 @@
+{
+    "name": "jannis___0",
+    "basename": "jannis",
+    "split": 0,
+    "task_type": "multiclass",
+    "n_num_features": 54,
+    "n_cat_features": 0,
+    "train_size": 53588,
+    "val_size": 13398,
+    "test_size": 16747,
+    "n_classes": 4
+}

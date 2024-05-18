@@ -1,0 +1,12 @@
+{
+    "name": "california_housing___0",
+    "basename": "california_housing",
+    "split": 0,
+    "task_type": "regression",
+    "n_num_features": 8,
+    "n_cat_features": 0,
+    "train_size": 13209,
+    "val_size": 3303,
+    "test_size": 4128,
+    "N_cols": ["medium-income", "house-age", "average-rooms", "average-bedrooms", "population", "average-occupation", "latitude", "longitude"]
+}
