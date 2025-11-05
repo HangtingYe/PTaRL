@@ -1,5 +1,5 @@
 <h1 align="center">
-[ICLR 2024 Spotlight]PTaRL: Prototype-based Tabular Representation Learning via Space Calibration
+[ICLR 2024]PTaRL: Prototype-based Tabular Representation Learning via Space Calibration
 
 
 Links: [<a href="https://openreview.net/forum?id=G32oY4Vnm8&noteId=G32oY4Vnm8">OpenReview</a>]
