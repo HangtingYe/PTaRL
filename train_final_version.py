@@ -209,9 +209,10 @@ def test(model, test_loader, task_type, y_std, args, config):
         assert task_type == 'regression'
         score = sklearn.metrics.mean_squared_error(y.reshape(-1,1), pred.reshape(-1,1)) ** 0.5 * y_std
 
-    print(f'test result, {score.item()}')
+    score_value = float(score)
+    print(f'test result, {score_value}')
 
-    np.save(open(f'./results_number/{args.dataname}_{args.model_type}_{args.ratio}_{args.hyper}_{args.seed}_{args.n_clusters}_{args.prototype_initial}.npy','wb'), score.item())
+    np.save(open(f'./results_number/{args.dataname}_{args.model_type}_{args.ratio}_{args.hyper}_{args.seed}_{args.n_clusters}_{args.prototype_initial}.npy','wb'), score_value)
     torch.save(model.state_dict(), f'./models_number/{args.dataname}_{args.model_type}_{args.ratio}_{args.hyper}_{args.seed}_{args.n_clusters}_{args.prototype_initial}.pth')
 
 
