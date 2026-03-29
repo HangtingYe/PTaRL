@@ -59,11 +59,15 @@ def run_one_epoch(model, data_loader, loss_func, model_type, config, ot_weight, 
             norm = torch.mm(torch.sqrt(torch.sum(hidden**2, axis=1, keepdim=True)), torch.sqrt(torch.sum(model.topic.T**2, axis=0, keepdim=True)))
 
             loss_ot = torch.mean(torch.sum(r_*(torch.mm(hidden.float(), model.topic.T.float()) / norm), axis=1))
-            loss += ot_weight * loss_ot
+            loss -= ot_weight * loss_ot
 
+            
             selected_rows = np.random.choice(r_.shape[0], int(r_.shape[0] * 0.5), replace=False)
 
-            distance = (r_[selected_rows].reshape(r_[selected_rows].shape[0],1,r_[selected_rows].shape[1])-r_[selected_rows]).abs().sum(dim=2)
+            # distance = (r_[selected_rows].reshape(r_[selected_rows].shape[0],1,r_[selected_rows].shape[1])-r_[selected_rows]).abs().sum(dim=2)
+            coord = F.normalize(r_.float(), dim=1)
+            cos_sim = torch.clamp(torch.mm(coord[selected_rows], coord[selected_rows].T), -1.0, 1.0)
+
             if loss_func == F.cross_entropy:
                 label_similarity = (y.reshape(-1,1)[selected_rows] == y.reshape(-1,1)[selected_rows].T).float()
             else:
@@ -75,10 +79,15 @@ def run_one_epoch(model, data_loader, loss_func, model_type, config, ot_weight, 
                 label_similarity = (y_assign.reshape(-1,1)[selected_rows] == y_assign.reshape(-1,1)[selected_rows].T).float()
             
             positive_mask = label_similarity
-            positive_loss = torch.sum(distance * positive_mask) / (torch.sum(distance)+1e-8)
-            loss_diversity = positive_loss
+            # positive_loss = torch.sum(distance * positive_mask) / (torch.sum(distance)+1e-8)
+            # loss_diversity = positive_loss
+
+            positive_count = positive_mask.sum()
+            log_denom = torch.logsumexp(cos_sim.reshape(-1), dim=0)
+            loss_diversity = -(positive_mask * (cos_sim - log_denom)).sum() / positive_count
 
             loss += diversity_weight*loss_diversity
+           
 
             # first should be sure that the the topic is learnable!
             r_1 = torch.sqrt(torch.sum(model.topic.float()**2,dim=1,keepdim=True))
