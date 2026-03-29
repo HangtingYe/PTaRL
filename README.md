@@ -13,7 +13,7 @@ Links: [<a href="https://openreview.net/forum?id=G32oY4Vnm8&noteId=G32oY4Vnm8">O
 Recommended for readers: create environment from `environment.yml` (versions aligned with the author's validated stack).
 
 ```bash
-cd PTaRL
+cd PTaRL-main-2
 
 conda env remove -n ptarl -y 2>/dev/null || true
 conda env create -f environment.yml
@@ -32,7 +32,17 @@ Expected from the environment check:
 If you see `No matching distribution found`:
 - Usually this is an index/network issue, not package absence.
 - Check with `python -m pip config list`.
+- In this repo, `environment.yml` keeps the default PyPI index for normal packages and adds the PyTorch wheel source only as an extra index for `torch`.
 - Then retry with an explicit index such as `-i https://pypi.org/simple` or your regional mirror.
+
+Recommended reproducibility settings before running experiments:
+
+```bash
+export PYTHONHASHSEED=0
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+```
 
 ## 📚 Instructions
 
