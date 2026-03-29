@@ -1,0 +1,12 @@
+{
+    "name": "helena___0",
+    "basename": "helena",
+    "split": 0,
+    "task_type": "multiclass",
+    "n_num_features": 27,
+    "n_cat_features": 0,
+    "train_size": 41724,
+    "val_size": 10432,
+    "test_size": 13040,
+    "n_classes": 100
+}
