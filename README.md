@@ -10,7 +10,7 @@ Links: [<a href="https://openreview.net/forum?id=G32oY4Vnm8&noteId=G32oY4Vnm8">O
 
 ## 1. Environment Setup
 
-Recommended for readers: create environment from `environment.yml` (designed to work on both local machines and Linux servers, following the same style as LLM_DAS).
+Recommended for readers: create environment from `environment.yml`.
 
 ```bash
 cd PTaRL
@@ -18,21 +18,6 @@ cd PTaRL
 conda env remove -n ptarl -y 2>/dev/null || true
 conda env create -f environment.yml
 conda activate ptarl
-
-# Environment check
-python -c "import torch, transformers; print('torch', torch.__version__); print('transformers', transformers.__version__)"
-```
-
-Expected from the environment check:
-- `torch` should be `2.4.1`.
-- `transformers` should be `4.46.3`.
-- The current training code calls `.cuda()` directly, so running experiments as-is still requires a CUDA-capable server environment even though the environment file itself is cross-platform.
-- If `./tokenizer` does not exist, the first run will automatically download `bert-base-uncased` and save it to `./tokenizer`.
-
-If you see `No matching distribution found`:
-- Usually this is an index/network issue, not package absence.
-- Check with `python -m pip config list`.
-- Then retry with an explicit index such as `-i https://pypi.org/simple` or your regional mirror.
 
 ## 📚 Instructions
 
