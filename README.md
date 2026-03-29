@@ -18,6 +18,7 @@ cd PTaRL
 conda env remove -n ptarl -y 2>/dev/null || true
 conda env create -f environment.yml
 conda activate ptarl
+```
 
 ## 📚 Instructions
 
