@@ -8,7 +8,7 @@ Links: [<a href="https://openreview.net/forum?id=G32oY4Vnm8&noteId=G32oY4Vnm8">O
 
 **📥 Contact Email Update:** Please use **yeht22@mails.jlu.edu.cn** for all future communications. The previous email (yeht2118@mails.jlu.edu.cn) is no longer active.
 
-## 1. Environment Setup
+## ⚙️ Environment Setup
 
 Recommended for readers: create environment from `environment.yml`.
 
